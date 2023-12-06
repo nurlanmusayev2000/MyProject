@@ -136,7 +136,6 @@ const fetchProductsForCategory = (data) => {
 const fetchChosenProduct = (data) => {
 
 
-
     return dispatch => {
 
 
@@ -184,6 +183,7 @@ const fetchLogIn = (data) => {
             }
         }).then(res => {
             localStorage.setItem('token', res.data.token);
+            localStorage.setItem('refreshtoken', res.data.refreshToken)
             dispatch(logIn(res.data.message, res.data.user, true, res.data.productsOfUser))
         }).catch(err => dispatch(catchError(err.message)))
     }
@@ -191,17 +191,26 @@ const fetchLogIn = (data) => {
 
 const fetchProfile = () => {
     const token = localStorage.getItem('token');
-
+    const refreshToken = localStorage.getItem('refreshtoken')
     return dispatch =>
         axios.get(`http://localhost:3005/api/ecommerce/profile`, {
 
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`,
+                'refreshToken': refreshToken
             }
         }).then(res => {
+            console.log('fethprofilesuccces', res);
+            if (res.data.newtoken !== undefined) {
+                localStorage.setItem('token', res.data.newtoken)
+            }
             dispatch(accessprofile(res.data.userdetails, res.data.productsOfUser))
         }).catch(err => {
+            console.log('fetchProfile error', err.response.status);
+            if (err.response.status === 403) {
+                localStorage.clear()
+            }
             dispatch(deniedProfile(err))
             dispatch(catchError(err.message))
         })

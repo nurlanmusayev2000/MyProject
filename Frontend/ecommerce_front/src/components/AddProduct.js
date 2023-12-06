@@ -1,5 +1,5 @@
 import {connect} from "react-redux"
-import '../addProduct.css'
+import '../style/addProduct.css'
 import azerbaijanCities from "../datas/cityData";
 import axios from "axios";
 import {postNewProduct} from "../redux/action";

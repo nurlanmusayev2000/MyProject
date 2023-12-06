@@ -1,5 +1,5 @@
 import {connect} from "react-redux"
-import '../updateProduct.css'
+import '../style/updateProduct.css'
 import azerbaijanCities from "../datas/cityData";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";

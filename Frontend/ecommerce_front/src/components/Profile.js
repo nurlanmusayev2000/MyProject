@@ -1,7 +1,7 @@
 import {connect} from "react-redux"
 import card from "./subComponents/productCard";
 import {deleteProduct, fetchChosenProduct, fetchProfile, sendId} from "../redux/action";
-import '../profile.css'
+import '../style/profile.css'
 import {Link} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 

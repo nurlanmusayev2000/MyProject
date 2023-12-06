@@ -9,7 +9,7 @@ const ProductByCatg=(props)=>{
 
 //enter the product card for more details
 	const handleChosenProduct = (e) => {
-		const productId = e.target.parentElement.firstChild.innerText;
+		const productId = e.target.parentElement.parentElement.dataset.id;
 		props.fetchChosenProduct(productId);
 	}
 
@@ -20,19 +20,23 @@ const ProductByCatg=(props)=>{
   let dateObj = new Date(date);
   const formattedDate = dateObj.toLocaleString();
 		return(
-			<Link to='/category/product' data-id={product.id} onClick={handleChosenProduct} className="card" key={product.product_name} >
-				<span className="d-none">{product.product_id}</span>
-				<img src={product.img1}  alt=""/>
-				<div className="card-body">
-					<h3 className="card-title">{product.price} Azn</h3>
-					<h5 className="card-title">{product.product_name}</h5>
-					<p className="card-text">{product.product_description}</p>
+				<div className="user-products">
+					<Link to='/category/product' data-id={product.product_id} onClick={handleChosenProduct} className="card" key={product.product_name} >
+						<div className="img-card">
+							<img src={product.img1}  alt=""/>
+						</div>
+						<div className="card-body">
+							<h3 className="card-title">{product.price} Azn</h3>
+							<h5 className="card-title">{product.product_name}</h5>
+							<p className="card-text">{product.product_description}</p>
+						</div>
+						<div className="card-footer">
+							<p>{ formattedDate}</p>
+							<p>{product.city}</p>
+						</div>
+					</Link>
 				</div>
-				<div className="card-footer">
-					<p>{ formattedDate}</p>
-					<p>{product.city}</p>
-				</div>
-			</Link>
+
 		)
 	})) :(
 		<h1>There is no product for this category</h1>

@@ -18,7 +18,7 @@ const card=(key,path,products,clickHandler,loginCheck,updateHandler,deleteHandle
     {crud}
     <Link to={path} data-id={products.product_id} onClick={clickHandler} className="card" key={products.id} >
         <div className="img-card">
-          <img src={products.img1} alt="" />
+          <img src={products.img1} className="img-thumbnail" alt="" />
         </div>
         <div className="card-body">
           <h3 className="card-title">{products.price} Azn</h3>

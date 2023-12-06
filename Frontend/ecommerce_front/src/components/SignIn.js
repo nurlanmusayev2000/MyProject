@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import '../SignIn.css'
+import '../style/SignIn.css'
 import {fetchSignUp} from '../redux/action';
 import {  Link, useNavigate } from "react-router-dom";
 

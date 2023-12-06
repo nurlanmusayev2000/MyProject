@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { FaFacebookF ,FaInstagram,FaMailBulk, FaPhoneAlt} from "react-icons/fa";
 import azerbaijanCities from "../datas/cityData";
-import '../footer.css'
+import '../style/footer.css'
 import {connect} from "react-redux";
 import {chooseProductForCity} from "../redux/action";
 

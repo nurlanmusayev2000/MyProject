@@ -17,7 +17,8 @@ const {
     addNewProductImg,
     deleteProduct,
     updateProduct,
-    updateProductImg
+    updateProductImg,
+    sendEmailToSeller
 } = require('./Controller');
 
 router.get('/', getAllProductDetails);
@@ -28,7 +29,7 @@ router.post('/ecommerce/signup', postSignUpUser);
 router.post('/ecommerce/login', postLoginUser);
 router.get('/ecommerce/profile', authMiddleware, getUserProfile);
 router.post('/ecommerce/addProduct', authMiddleware, postNewProduct);
-
+router.post('/send/email', sendEmailToSeller);
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/')

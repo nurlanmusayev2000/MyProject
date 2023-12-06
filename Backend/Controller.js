@@ -10,6 +10,7 @@ const knex = require('knex')({
         port: 5432
     }
 });
+const nodemailer = require('nodemailer')
 const secretKey = 'mySecretKey'
 
 
@@ -35,7 +36,7 @@ const getProduct = async(req, res) => {
     const id = req.params.id;
     const product = await knex.select('*')
         .from('products')
-        .join('categories', 'categories.id', '=', 'products.product_category')
+        .join('categories', 'categories.id', '=', 'products.product_category').join("usersdata", "products.refer_user", "=", "usersdata.id")
         .where({ 'products.product_id': id });
 
     res.json({ "product": product })
@@ -69,9 +70,7 @@ const postSignUpUser = async(req, res) => {
         const token = jwt.sign({ id: newUserIdAndUsername[0].id, username: newUserIdAndUsername[0].username }, secretKey, {
             expiresIn: '1h', // Token expires in 1 hour
         });
-        const refreshToken = jwt.sign({ id: user.id }, secretKey, {
-            expiresIn: '10h', // Refresh token expires in 7 days
-        });
+
 
 
         res.status(200).json({ message: 'Login successful', user: newUser, token });
@@ -93,13 +92,14 @@ const postLoginUser = async(req, res) => {
         const userdetails = await knex('usersdata').select().where({ 'username': username });
         const productsOfUser = await knex('products').select().where({ "refer_user": userdetails[0].id })
         const token = jwt.sign({ id: userdetails[0].id, username: userdetails[0].username }, secretKey, {
-            expiresIn: '5h'
+            expiresIn: '1h'
         });
-        const refreshToken = jwt.sign({ id: user.id }, secretKey, {
-            expiresIn: '10h', // Refresh token expires in 7 days
+        const refreshToken = jwt.sign({ id: userdetails[0].id, username: userdetails[0].username }, secretKey, {
+            expiresIn: '7d', // Refresh token expires in 7 days
         });
         res.json({ message: 'Login successful', user: userdetails, productsOfUser, token, refreshToken });
     } catch (error) {
+        console.log('error bashverdi', error);
         res.json({ "error": error })
     }
 
@@ -107,12 +107,11 @@ const postLoginUser = async(req, res) => {
 
 const getUserProfile = async(req, res) => {
     try {
-        const username = req.user
+        const newtoken = req.newtoken
+        const { id, username, iat, exp } = req.user
         const persistedUser = await knex('usersdata').select().where({ 'username': username });
-
         const productsOfUser = await knex('products').select().where({ "refer_user": persistedUser[0].id })
-
-        res.json({ 'userdetails': persistedUser, productsOfUser })
+        res.json({ 'userdetails': persistedUser, productsOfUser, newtoken })
     } catch (error) {
         res.json({ "error": error })
     }
@@ -196,6 +195,32 @@ const updateProductImg = async(req, res) => {
 
 }
 
+const sendEmailToSeller = (req, res) => {
+    const { from, to, subject, message } = req.body;
+    const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            user: 'nurlan.2000.m@gmail.com',
+            pass: 'ysxrlqifklpgayql'
+        }
+    })
+
+    const mail_option = {
+        from: from,
+        to: to,
+        subject: subject,
+        text: message
+    }
+
+    transporter.sendMail(mail_option, (error, info) => {
+        if (error) {
+            console.log(error);
+        } else {
+            res.json({ 'message': "message was sent successfully" })
+        }
+    })
+}
+
 
 module.exports = {
     getAllProductDetails,
@@ -209,5 +234,6 @@ module.exports = {
     addNewProductImg,
     deleteProduct,
     updateProduct,
-    updateProductImg
+    updateProductImg,
+    sendEmailToSeller
 }
