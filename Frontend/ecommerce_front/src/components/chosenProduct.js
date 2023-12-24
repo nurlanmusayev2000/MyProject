@@ -55,7 +55,10 @@ const Product=({product,categoryDetails})=>{
 			<li><b>City:</b>{productdetail.city}</li>
 			<li><b>Published Date: </b> {formattedDate}</li>
 		</ul>
-		<h2>{productdetail.price} AZN</h2>
+		<div>
+			<h2>{productdetail.price} AZN</h2>
+			<h3>Seller:{(productdetail.name).toUpperCase()} {(productdetail.surname).toUpperCase()}</h3>
+		</div>
 		</div>
 		<p>{productdetail.MoreaboutProduct}</p>
 		<div className="contact">

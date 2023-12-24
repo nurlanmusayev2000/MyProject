@@ -85,7 +85,7 @@ const AddProduct=(props)=>{
 					</select><br />
 					<label  htmlFor="product_name">Name:</label>
 					<input type="text" id="product_name" name="product_name" required /><br />
-					<label htmlFor="product_description">product description</label><br />
+					<label htmlFor="product_description">Product description:</label>
 					<textarea name="product_description" id="product_description" cols="30" rows="2" required></textarea><br />
 					<label htmlFor="price" >Price(you can enter product price with only AZN currency temporarly)</label>
 					<input type="text" id="price" name="price" required />

@@ -3,7 +3,10 @@ import {Link} from "react-router-dom";
 const card=(key,path,products,clickHandler,loginCheck,updateHandler,deleteHandler)=>{
 	let date = products.product_date;
   let dateObj = new Date(date);
-  const formattedDate = dateObj.toLocaleString();
+  let year=dateObj.getFullYear();
+  let month=dateObj.getMonth();
+  let day= dateObj.getDate();
+  const formattedDate = year +'-' + month + '-' + day;
   //if user is logged in he can delete or update his own product
   let crud;
   if (loginCheck) {

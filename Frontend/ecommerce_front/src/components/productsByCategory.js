@@ -18,7 +18,10 @@ const ProductByCatg=(props)=>{
 	const card=cardList?.length ? (cardList.map(product=>{
 		let date = product.product_date;
   let dateObj = new Date(date);
-  const formattedDate = dateObj.toLocaleString();
+  let year=dateObj.getFullYear();
+  let month=dateObj.getMonth();
+  let day= dateObj.getDate();
+  const formattedDate = year +'-' + month + '-' + day;
 		return(
 				<div className="user-products">
 					<Link to='/category/product' data-id={product.product_id} onClick={handleChosenProduct} className="card" key={product.product_name} >
