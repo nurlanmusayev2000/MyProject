@@ -15,6 +15,7 @@ const secretKey = 'mySecretKey'
 
 
 const getAllProductDetails = async(req, res) => {
+
     const productTable = await knex.select().from('products').orderBy('product_date', 'desc').limit(15);
     const categoryTable = await knex.select().from('categories');
     const subCategoryTb = await knex.select().from("subCategory");
@@ -22,8 +23,8 @@ const getAllProductDetails = async(req, res) => {
 
     const countofSubCat = await knex.select('product_subcategory').count().from('products').groupBy('product_subcategory')
     const countofCat = await knex.select('product_category').count().from('products').groupBy('product_category')
-
-    res.json({ "categories": categoryTable, "products": productTable, "subCategory": subCategoryTb, "tables": productWithCategories, "count": [countofCat, countofSubCat] })
+    res.json({ "heloo": "heloooo" })
+        //   res.json({ "categories": categoryTable, "products": productTable, "subCategory": subCategoryTb, "tables": productWithCategories, "count": [countofCat, countofSubCat] })
 }
 
 const getProductForCategory = async(req, res) => {
