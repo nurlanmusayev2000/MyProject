@@ -23,8 +23,7 @@ const getAllProductDetails = async(req, res) => {
 
     const countofSubCat = await knex.select('product_subcategory').count().from('products').groupBy('product_subcategory')
     const countofCat = await knex.select('product_category').count().from('products').groupBy('product_category')
-    res.json({ "heloo": "heloooo" })
-        //   res.json({ "categories": categoryTable, "products": productTable, "subCategory": subCategoryTb, "tables": productWithCategories, "count": [countofCat, countofSubCat] })
+    res.json({ "categories": categoryTable, "products": productTable, "subCategory": subCategoryTb, "tables": productWithCategories, "count": [countofCat, countofSubCat] })
 }
 
 const getProductForCategory = async(req, res) => {

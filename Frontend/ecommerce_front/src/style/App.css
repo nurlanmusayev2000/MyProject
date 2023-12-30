@@ -13,7 +13,7 @@
 }
 
 .nav_container {
-    width: 90%;
+    width: 98%;
     display: flex;
     padding: 0 30px;
     align-items: center;
@@ -24,18 +24,14 @@
     text-decoration: none;
     color: black;
     margin-right: 15px;
-    flex: .7;
     font-weight: bold;
     color: white;
 }
 
-.nav_category {
-    flex: .8;
-}
+.nav_category {}
 
 .search_form {
     display: flex;
-    flex: 4;
     background-color: white;
     margin: 4px;
     border-radius: 10px;
@@ -43,7 +39,6 @@
 
 .search_form input {
     border: 0;
-    flex: 4;
     border-radius: 10px;
 }
 
@@ -53,18 +48,14 @@ input:focus {
     border: 1px solid #FFF;
 }
 
-.search_form .dropdown {
-    flex: 1;
-}
+.search_form .dropdown {}
 
 .search_form button {
-    flex: 0.9;
     margin: 1px;
     border-radius: 10px;
 }
 
 .nav_button {
-    flex: .5;
     margin: 2px;
     padding: 0;
     font-size: .9rem;
