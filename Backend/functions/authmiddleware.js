@@ -51,5 +51,50 @@ async function authenticateJWT(req, res, next) {
     }
 };
 
+async function dateMiddleWare(req, res, next) {
+    console.log('from front', req.body.data);
+    const date = req.body.data.date
+    const now = new Date()
+    const day = now.toLocaleDateString()
+    const month = now.getMonth()
+    const week = now.getDate()
+    const products = await knex('products').select();
+    const pastDayProducts = []
+    const pastWeekProducts = []
+    const pastMonthProducts = []
+    products.forEach(item => {
+        const dateChange = item.product_date.toLocaleDateString();
+        const monthChange = item.product_date.getMonth();
+        const weekChange = item.product_date.getDate();
 
-module.exports = authenticateJWT
+        if (dateChange === day) {
+            console.log('past day');
+            pastDayProducts.push(item)
+        } else if (Math.abs(monthChange - month) <= 1) {
+            console.log('pastMonth');
+            pastMonthProducts.push(item)
+
+            if (Math.abs(weekChange - week) <= 7) {
+
+                console.log('pastweek');
+                pastWeekProducts.push(item)
+
+            }
+        }
+    })
+    if (date == 0) {
+        req.productForDate = pastDayProducts;
+        next()
+    } else if (date == 1) {
+        req.productForDate = pastWeekProducts;
+        next()
+    } else if (date == 2) {
+        req.productForDate = pastMonthProducts;
+        next()
+    } else {
+        res.send = 'no product has found';
+        next()
+    }
+}
+
+module.exports = { authenticateJWT, dateMiddleWare }

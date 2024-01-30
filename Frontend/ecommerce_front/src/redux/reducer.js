@@ -12,7 +12,8 @@ const initialState = {
     usersDetail: [],
     productId: '',
     hasError: false,
-    error: ''
+    error: '',
+    filteredProduct: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -40,7 +41,10 @@ const reducer = (state = initialState, action) => {
         case "SEND_ID_TO_ANOTHER_COMPONENT":
             return {...state, productId: action.payload }
         case "CATCH_ERROR":
-            return {...state, hasError: true, error: action.payload }
+            return {...state, hasError: true, error: action.payload };
+        case "GET_FILTERED_PRODUCTS":
+            return {...state, filteredProduct: action.payload }
+
         default:
             return state;
     }

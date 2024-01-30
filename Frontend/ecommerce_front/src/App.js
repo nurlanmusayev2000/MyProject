@@ -8,6 +8,7 @@ import MainPageCards from "./components/MainPageCards";
 import ProductsByCategory from "./components/productsByCategory";
 import ProductForCity from "./components/productForCity";
 import Product from "./components/chosenProduct";
+import Filter from './components/Filter'
 import SearchResults from "./components/SearchResults";
 import SignIn from "./components/SignIn";
 import Login from "./components/login";
@@ -28,6 +29,7 @@ function App() {
         <Route path='/city' element={<ProductForCity/>}/>
         <Route path="/category/product" element={<Product/>}/>
         <Route path="/category/product/search" element={<SearchResults/>}/>
+        <Route path='/Ecommerce/filter' element={<Filter/>}/>
         <Route path="/Ecommerce/signIn" element={<SignIn/>}/>
         <Route path="/Ecommerce/logIn" element={<Login/>}/>
         <Route path="/Ecommerce/profile" element={<Profile/>}/>

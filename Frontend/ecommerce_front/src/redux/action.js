@@ -107,6 +107,12 @@ const catchError = (data) => {
     }
 }
 
+const filteredProducts = (data) => {
+    return {
+        type: "GET_FILTERED_PRODUCTS",
+        payload: data
+    }
+}
 
 ///MIDDLEWARES
 
@@ -234,4 +240,17 @@ const deleteProduct = (data) => {
     }
 }
 
-export { fetchAllProducts, fetchProductsForCategory, chooseProductForCity, fetchChosenProduct, getPath, fetchSearchProduct, getSearchProducts, fetchSignUp, fetchLogIn, fetchProfile, postNewProduct, deleteProduct, sendId }
+
+const fetchFilteredProduct = (data) => {
+
+
+    return dispatch => {
+        console.log('dataofform', data);
+        axios.post('http://localhost:3005/api/ecommerce/filter', { data }).then(res => {
+            console.log(res);
+            dispatch(filteredProducts(res))
+        })
+    }
+}
+
+export { fetchAllProducts, fetchProductsForCategory, chooseProductForCity, fetchChosenProduct, getPath, fetchSearchProduct, getSearchProducts, fetchSignUp, fetchLogIn, fetchProfile, postNewProduct, deleteProduct, sendId, fetchFilteredProduct }

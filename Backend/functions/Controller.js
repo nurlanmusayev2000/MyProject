@@ -221,6 +221,28 @@ const sendEmailToSeller = (req, res) => {
     })
 }
 
+const filteredProduct = async(req, res) => {
+    const { category, subCategory, date, LessPrice, higherPrice, isNew } = req.body.data;
+
+    const producsDateFiltered = req.productForDate;
+    console.log('producsDateFiltered',producsDateFiltered);
+    const filteredProduct = producsDateFiltered?.filter(prod => {
+        const resultByCategory = prod.product_category == category;
+        const resultBySubCat = prod.product_subcategory == subCategory;
+        const resultByPrice = prod.price >= LessPrice && prod.price <= higherPrice;
+        const resultByNewProduct = prod.Isnew == isNew
+        console.log(resultByNewProduct);
+        if (resultByCategory && resultBySubCat && resultByPrice && resultByNewProduct) {
+            return prod
+        }
+    })
+    console.log(req.productForDate);
+
+    if (filteredProduct.length==0) {
+        res.json({filteredProduct:'There is no Product as you want'})
+    }else{
+        res.json({ filteredProduct })}
+}
 
 module.exports = {
     getAllProductDetails,
@@ -235,5 +257,6 @@ module.exports = {
     deleteProduct,
     updateProduct,
     updateProductImg,
-    sendEmailToSeller
+    sendEmailToSeller,
+    filteredProduct
 }

@@ -7,9 +7,6 @@
 
 .navBar {
     background-color: orange;
-    display: flex;
-    justify-content: center;
-    width: auto;
 }
 
 .nav_container {
@@ -17,6 +14,14 @@
     display: flex;
     padding: 0 30px;
     align-items: center;
+    justify-content: space-between;
+}
+
+.nav-start {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    justify-content: space-evenly;
 }
 
 .main_page_link {
@@ -28,18 +33,19 @@
     color: white;
 }
 
-.nav_category {}
-
 .search_form {
     display: flex;
     background-color: white;
+    border-radius: 10px;
+}
+
+.search-form {
     margin: 4px;
     border-radius: 10px;
 }
 
 .search_form input {
     border: 0;
-    border-radius: 10px;
 }
 
 input:focus {
@@ -47,6 +53,18 @@ input:focus {
     outline: none;
     border: 1px solid #FFF;
 }
+
+.link {
+    font-size: 1.1rem;
+}
+
+.profiIcon {
+    font-size: 2rem;
+}
+
+
+/*
+
 
 .search_form .dropdown {}
 
@@ -70,9 +88,7 @@ input:focus {
     overflow: scroll;
 }
 
-.profiIcon {
-    font-size: 2rem;
-}
+*/
 
 @media (max-width:800px) {
     .navBar {
